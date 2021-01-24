@@ -5,7 +5,12 @@
  */
 package Vues;
 
+import Model.ModelLaboratoire;
+import Model.ModelRegion;
+import Model.ModelSecteur;
+import Model.ModelVisiteur;
 import Tools.ConnexionBDD;
+import Tools.FonctionsMetier;
 
 /**
  *
@@ -13,6 +18,11 @@ import Tools.ConnexionBDD;
  */
 public class frmListerModifierVisiteur extends javax.swing.JFrame {
 
+    ModelSecteur mdlSec;
+    ModelLaboratoire mdlLabo;
+    ModelRegion mdlReg;
+    ModelVisiteur mdlVis;
+    FonctionsMetier fm;
     /**
      * Creates new form frmListerModifierVisiteur
      */
@@ -58,6 +68,11 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
         jComboBox3 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -234,9 +249,9 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 31, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
@@ -265,8 +280,9 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,6 +323,15 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
         frm3.setVisible(true);
         }
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        fm = new FonctionsMetier();
+        mdlVis = new ModelVisiteur();
+        mdlVis.loadDatas2(fm.GetAllVisiteur());
+        tblVisiteur.setModel(mdlVis);
+
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

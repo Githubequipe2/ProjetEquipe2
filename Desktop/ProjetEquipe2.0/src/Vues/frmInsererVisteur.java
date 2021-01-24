@@ -5,7 +5,11 @@
  */
 package Vues;
 
+import Model.ModelLaboratoire;
+import Model.ModelSecteur;
 import Tools.ConnexionBDD;
+import Tools.FonctionsMetier;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,6 +17,9 @@ import Tools.ConnexionBDD;
  */
 public class frmInsererVisteur extends javax.swing.JFrame {
 
+    ModelSecteur mdlSec;
+    ModelLaboratoire mdlLabo;
+    FonctionsMetier fm;
     /**
      * Creates new form frmInsererVisteur
      */
@@ -46,8 +53,8 @@ public class frmInsererVisteur extends javax.swing.JFrame {
         lblSecteur = new javax.swing.JLabel();
         tblSecteur = new javax.swing.JScrollPane();
         tblCodeSecteur = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnValiderInsererVisiteur = new javax.swing.JButton();
+        btnAnnulerInsererVisiteur = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txtPrenom = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -63,6 +70,11 @@ public class frmInsererVisteur extends javax.swing.JFrame {
         txtDateEmbauche = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -115,11 +127,21 @@ public class frmInsererVisteur extends javax.swing.JFrame {
         tblCodeSecteur.setGridColor(new java.awt.Color(255, 255, 255));
         tblSecteur.setViewportView(tblCodeSecteur);
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 153));
-        jButton1.setText("Valider");
+        btnValiderInsererVisiteur.setBackground(new java.awt.Color(0, 0, 153));
+        btnValiderInsererVisiteur.setText("Valider");
+        btnValiderInsererVisiteur.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnValiderInsererVisiteurMouseClicked(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 153));
-        jButton2.setText("Annuler");
+        btnAnnulerInsererVisiteur.setBackground(new java.awt.Color(0, 0, 153));
+        btnAnnulerInsererVisiteur.setText("Annuler");
+        btnAnnulerInsererVisiteur.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAnnulerInsererVisiteurMouseClicked(evt);
+            }
+        });
 
         jLabel8.setText("Prenom");
 
@@ -178,7 +200,7 @@ public class frmInsererVisteur extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txtNom, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                                            .addComponent(txtMatricule, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)))
+                                            .addComponent(txtMatricule)))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(3, 3, 3)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,9 +227,9 @@ public class frmInsererVisteur extends javax.swing.JFrame {
                         .addGap(53, 53, 53))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnValiderInsererVisiteur, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAnnulerInsererVisiteur, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
@@ -255,8 +277,8 @@ public class frmInsererVisteur extends javax.swing.JFrame {
                         .addComponent(tblSecteur1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnValiderInsererVisiteur)
+                    .addComponent(btnAnnulerInsererVisiteur))
                 .addGap(21, 21, 21))
         );
 
@@ -285,7 +307,7 @@ public class frmInsererVisteur extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,7 +335,7 @@ public class frmInsererVisteur extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+                .addGap(0, 20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,6 +376,94 @@ public class frmInsererVisteur extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        
+        
+        
+        fm = new FonctionsMetier();
+        mdlLabo = new ModelLaboratoire();
+        mdlLabo.loadDatas(fm.GetAllLaboratoire());
+        tblCodeLabo.setModel(mdlLabo);
+        
+        txtMatricule.setText(String.valueOf(fm.GetLastMatricule()));
+        
+        mdlSec = new ModelSecteur();
+        mdlSec.loadDatas(fm.GetAllSecteurs());
+        tblCodeSecteur.setModel(mdlSec);
+        
+        
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnValiderInsererVisiteurMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnValiderInsererVisiteurMouseClicked
+        // TODO add your handling code here:
+        if(txtNom.getText().compareTo("") == 0)
+        {
+            // On affiche un message
+            JOptionPane.showMessageDialog(null,
+                    "Veuillez saisir un Nom", "Erreur de saisie",
+                    JOptionPane.ERROR_MESSAGE);
+        }else if(txtPrenom.getText().compareTo("") == 0)
+        {
+            // On affiche un message
+            JOptionPane.showMessageDialog(null,
+                    "Veuillez saisir un Prenom", "Erreur de saisie",
+                    JOptionPane.ERROR_MESSAGE);
+        }else if(txtAdresse.getText().compareTo("") == 0)
+        {
+            // On affiche un message
+            JOptionPane.showMessageDialog(null,
+                    "Veuillez saisir une Adresse", "Erreur de saisie",
+                    JOptionPane.ERROR_MESSAGE);
+        }else if(txtCodePostale.getText().compareTo("") == 0)
+        {
+            // On affiche un message
+            JOptionPane.showMessageDialog(null,
+                    "Veuillez saisir un Code Postale", "Erreur de saisie",
+                    JOptionPane.ERROR_MESSAGE);
+        }else if(txtVille.getText().compareTo("") == 0)
+        {
+            // On affiche un message
+            JOptionPane.showMessageDialog(null,
+                    "Veuillez saisir une Ville", "Erreur de saisie",
+                    JOptionPane.ERROR_MESSAGE);
+        }else if(txtDateEmbauche.getText().compareTo("") == 0)
+        {
+            // On affiche un message
+            JOptionPane.showMessageDialog(null,
+                    "Veuillez saisir une Date d'embauche", "Erreur de saisie",
+                    JOptionPane.ERROR_MESSAGE);
+        }else if(tblCodeLabo.getSelectedRowCount()==0)
+        {
+            JOptionPane.showMessageDialog(null,
+                    "Sélectionnez un Laboratoire", "Choix de l'activité",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        else if(tblCodeSecteur.getSelectedRowCount()==0)
+            {
+                JOptionPane.showMessageDialog(null,
+                    "Sélectionnez un Secteur", "Choix d'une formation",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        else{
+            fm.InsererVisiteur(fm.GetLastMatricule(), txtNom.getText(), txtPrenom.getText(), txtAdresse.getText(), txtCodePostale.getText(), txtVille.getText(), txtDateEmbauche.getText(), Integer.parseInt(tblCodeSecteur.getValueAt(tblCodeSecteur.getSelectedRow(), 0).toString()), Integer.parseInt(tblCodeLabo.getValueAt(tblCodeLabo.getSelectedRow(), 0).toString()));
+            JOptionPane.showMessageDialog(null,
+                    "Votre visiteur"+ txtNom.getText()+ txtPrenom.getText() +"est inscrits","Nouvelle inscription",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnValiderInsererVisiteurMouseClicked
+
+    private void btnAnnulerInsererVisiteurMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnnulerInsererVisiteurMouseClicked
+        // TODO add your handling code here:
+        txtNom.setText("");
+        txtPrenom.setText("");
+        txtAdresse.setText("");
+        txtCodePostale.setText("");
+        txtDateEmbauche.setText("");
+        txtVille.setText("");
+        
+    }//GEN-LAST:event_btnAnnulerInsererVisiteurMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -390,8 +500,8 @@ public class frmInsererVisteur extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnAnnulerInsererVisiteur;
+    private javax.swing.JButton btnValiderInsererVisiteur;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;

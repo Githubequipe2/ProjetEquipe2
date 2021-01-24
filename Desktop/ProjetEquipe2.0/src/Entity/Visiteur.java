@@ -25,7 +25,7 @@ public class Visiteur {
     public Visiteur(){
         
     }
-    public Visiteur(int unVisMat, String unVisNom, String unVisPre, String unVisAd, String unVisCp, String unVisVille, String unVisDateEmb, Date uneDateEmb, int unSecCode, int unLaboCode){
+    public Visiteur(int unVisMat, String unVisNom, String unVisPre, String unVisAd, String unVisCp, String unVisVille, Date uneDateEmb, int unSecCode, int unLaboCode){
         
         visMatricule=unVisMat;
         visNom=unVisNom;
@@ -131,13 +131,7 @@ public class Visiteur {
         return visDateEmbauche;
     }
 
-    /**
-     * @param visDateEmbauche the visDateEmbauche to set
-     */
-    public void setVisDateEmbauche(Date visDateEmbauche) {
-        this.visDateEmbauche = visDateEmbauche;
-    }
-
+    
     /**
      * @return the secCode
      */

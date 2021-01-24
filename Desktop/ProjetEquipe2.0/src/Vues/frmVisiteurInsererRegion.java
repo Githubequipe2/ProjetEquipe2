@@ -5,7 +5,12 @@
  */
 package Vues;
 
+import Model.ModelLaboratoire;
+import Model.ModelRegion;
+import Model.ModelSecteur;
+import Model.ModelVisiteur;
 import Tools.ConnexionBDD;
+import Tools.FonctionsMetier;
 
 /**
  *
@@ -13,6 +18,11 @@ import Tools.ConnexionBDD;
  */
 public class frmVisiteurInsererRegion extends javax.swing.JFrame {
 
+    ModelSecteur mdlSec;
+    ModelLaboratoire mdlLabo;
+    ModelRegion mdlReg;
+    ModelVisiteur mdlVis;
+    FonctionsMetier fm;
     /**
      * Creates new form frmVisiteurInsererRegion
      */
@@ -188,7 +198,7 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,8 +225,9 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,6 +270,7 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_formWindowOpened
 
     /**
