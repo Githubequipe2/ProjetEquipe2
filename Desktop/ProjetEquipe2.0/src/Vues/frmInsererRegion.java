@@ -5,7 +5,13 @@
  */
 package Vues;
 
+import Model.ModelLaboratoire;
+import Model.ModelRegion;
+import Model.ModelSecteur;
+import Model.ModelVisiteur;
 import Tools.ConnexionBDD;
+import Tools.FonctionsMetier;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,6 +19,11 @@ import Tools.ConnexionBDD;
  */
 public class frmInsererRegion extends javax.swing.JFrame {
 
+    ModelSecteur mdlSec;
+    ModelLaboratoire mdlLabo;
+    ModelRegion mdlReg;
+    ModelVisiteur mdlVis;
+    FonctionsMetier fm;
     /**
      * Creates new form frmInsererRegion
      */
@@ -45,11 +56,16 @@ public class frmInsererRegion extends javax.swing.JFrame {
         txtCodeRegion = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         tblSecteur = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        tblSecteur2 = new javax.swing.JTable();
+        btnValiderInsereRegion = new javax.swing.JButton();
+        btnInsererRegAnnuler = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -91,7 +107,7 @@ public class frmInsererRegion extends javax.swing.JFrame {
 
         jLabel7.setText("Code Secteur");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblSecteur2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -99,14 +115,24 @@ public class frmInsererRegion extends javax.swing.JFrame {
 
             }
         ));
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        tblSecteur.setViewportView(jTable1);
+        tblSecteur2.setGridColor(new java.awt.Color(255, 255, 255));
+        tblSecteur.setViewportView(tblSecteur2);
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 153));
-        jButton1.setText("Valider");
+        btnValiderInsereRegion.setBackground(new java.awt.Color(0, 0, 153));
+        btnValiderInsereRegion.setText("Valider");
+        btnValiderInsereRegion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnValiderInsereRegionMouseClicked(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 153));
-        jButton2.setText("Annuler");
+        btnInsererRegAnnuler.setBackground(new java.awt.Color(0, 0, 153));
+        btnInsererRegAnnuler.setText("Annuler");
+        btnInsererRegAnnuler.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnInsererRegAnnulerMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -131,9 +157,9 @@ public class frmInsererRegion extends javax.swing.JFrame {
                 .addContainerGap(61, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnValiderInsereRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnInsererRegAnnuler, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
@@ -156,8 +182,8 @@ public class frmInsererRegion extends javax.swing.JFrame {
                     .addComponent(tblSecteur, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(btnInsererRegAnnuler)
+                    .addComponent(btnValiderInsereRegion))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -186,7 +212,7 @@ public class frmInsererRegion extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +240,7 @@ public class frmInsererRegion extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,6 +282,47 @@ public class frmInsererRegion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        fm = new FonctionsMetier();
+        mdlSec = new ModelSecteur();
+        mdlSec.loadDatas(fm.GetAllSecteurs());
+        tblSecteur2.setModel(mdlSec);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnValiderInsereRegionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnValiderInsereRegionMouseClicked
+        // TODO add your handling code here:
+        if(txtNomRegion.getText().compareTo("") == 0)
+        {
+            // On affiche un message
+            JOptionPane.showMessageDialog(null,
+                    "Veuillez saisir un Nom de Region", "Erreur de saisie",
+                    JOptionPane.ERROR_MESSAGE);
+        }else if(txtCodeRegion.getText().compareTo("") == 0)
+        {
+            // On affiche un message
+            JOptionPane.showMessageDialog(null,
+                    "Veuillez saisir un Code de Region", "Erreur de saisie",
+                    JOptionPane.ERROR_MESSAGE);
+        }else if(tblSecteur2.getSelectedRowCount()==0)
+            {
+                JOptionPane.showMessageDialog(null,
+                    "Sélectionnez un Secteur", "Choix d'une formation",
+                    JOptionPane.ERROR_MESSAGE);
+        }else{
+            fm.InsererRegion( Integer.parseInt(txtCodeRegion.getText()),Integer.parseInt(tblSecteur2.getValueAt(tblSecteur2.getSelectedRow(), 0).toString()), txtNomRegion.getText());
+             JOptionPane.showMessageDialog(null,
+                    "Votre région"+" "+txtNomRegion.getText()+" "+"est enregistrée","Nouvelle inscription",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnValiderInsereRegionMouseClicked
+
+    private void btnInsererRegAnnulerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsererRegAnnulerMouseClicked
+        // TODO add your handling code here:
+        txtCodeRegion.setText("");
+        txtNomRegion.setText("");
+    }//GEN-LAST:event_btnInsererRegAnnulerMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -292,8 +359,8 @@ public class frmInsererRegion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnInsererRegAnnuler;
+    private javax.swing.JButton btnValiderInsereRegion;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -305,9 +372,9 @@ public class frmInsererRegion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAccueil;
     private javax.swing.JScrollPane tblSecteur;
+    private javax.swing.JTable tblSecteur2;
     private javax.swing.JTextField txtCodeRegion;
     private javax.swing.JTextField txtNomRegion;
     // End of variables declaration//GEN-END:variables

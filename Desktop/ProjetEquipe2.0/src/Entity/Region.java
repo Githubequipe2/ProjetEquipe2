@@ -14,16 +14,16 @@ public class Region {
     private int regCode;
     private int secCode;
     private String regNom;
-    public Object getRegNom;
+    public String getRegNom;
     
     public Region(){
         
     }
     
-    public Region(int unRegCode, int unSecCode, String unRegNom){
+    public Region(String unRegNom){
         
-        regCode=unRegCode;
-        secCode=unSecCode;
+//        regCode=unRegCode;
+//        secCode=unSecCode;
         regNom=unRegNom;
         
     }

@@ -10,6 +10,7 @@ import Entity.Region;
 import Entity.Secteur;
 import Entity.Visiteur;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -30,7 +31,8 @@ public interface IMetier {
     public ArrayList<Laboratoire> GetAllLaboratoire();
     
     public ArrayList<Visiteur> GetAllVisiteur();
-    public void ModifierVisiteur(String visNom, String visVille, String visAdresse, String visCp, int secCode, int laboCode);
+    public ArrayList<Visiteur> GetAllVisiteur2();
+    public void ModifierVisiteur(int visMatricule, String visNom, String visVille, String visAdresse, String visCp, int secCode, int laboCode);
     
     public void VisiteurInsererRegion(int visMatricule, String JJMMAA, int regCode, String traRole);
     

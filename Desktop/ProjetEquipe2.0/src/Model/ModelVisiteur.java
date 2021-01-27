@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModelVisiteur extends AbstractTableModel{
     
-private String[] nomsColonnes = {"Nom", "Prenom", "Adresse", "Cp", "Ville", "Secteur", "Laboratoire"};
+    private String[] nomsColonnes ;
     private Vector<String[]> rows;
 
     @Override
@@ -42,18 +42,20 @@ private String[] nomsColonnes = {"Nom", "Prenom", "Adresse", "Cp", "Ville", "Sec
     public void loadDatas(ArrayList<Visiteur> lesVisiteurs)
     {
         rows = new Vector<>();
+        nomsColonnes = new String[]{"Matricule", "Nom", "Prenom", "Adresse", "CP", "Ville", "Secteur","Laboratoire"};
         for(Visiteur vis : lesVisiteurs)
         {
-            rows.add(new String[]{String.valueOf(vis.getVisNom()),vis.getVisPrenom()});
+            rows.add(new String[]{String.valueOf(vis.getVisMatricule()),vis.getVisNom(),vis.getVisPrenom(),vis.getVisAdresse(),String.valueOf(vis.getVisCp()),vis.getVisVille(),String.valueOf(vis.getLeSecteur()),String.valueOf(vis.getLeLaboratoire())});
         }
         fireTableChanged(null);
     }
-     public void loadDatas2(ArrayList<Visiteur> lesVisiteurs)
+     public void loadDatas3Colonnes(ArrayList<Visiteur> lesVisiteurs)
     {
         rows = new Vector<>();
+        nomsColonnes = new String[]{"Matricule","Nom", "Prénom"};
         for(Visiteur vis : lesVisiteurs)
         {
-            rows.add(new String[]{String.valueOf(vis.getVisNom()),vis.getVisPrenom(),vis.getVisAdresse(),vis.getVisCp(),vis.getVisVille() });
+            rows.add(new String[]{String.valueOf(vis.getVisMatricule()),vis.getVisNom(),vis.getVisPrenom()});
         } // j'ai pas mis le secteur et le laboratoire vu que c'est en sec sa fait erreur vu qu'ici on est en vis signée NA mdr
         fireTableChanged(null);
     }

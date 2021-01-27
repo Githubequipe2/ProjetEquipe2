@@ -270,7 +270,10 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        
+        fm = new FonctionsMetier();
+        mdlVis = new ModelVisiteur();
+        mdlVis.loadDatas3Colonnes(fm.GetAllVisiteur2());
+        tblVisiteur.setModel(mdlVis);
     }//GEN-LAST:event_formWindowOpened
 
     /**

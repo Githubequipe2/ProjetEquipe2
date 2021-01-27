@@ -448,7 +448,7 @@ public class frmInsererVisteur extends javax.swing.JFrame {
         else{
             fm.InsererVisiteur(fm.GetLastMatricule(), txtNom.getText(), txtPrenom.getText(), txtAdresse.getText(), txtCodePostale.getText(), txtVille.getText(), txtDateEmbauche.getText(), Integer.parseInt(tblCodeSecteur.getValueAt(tblCodeSecteur.getSelectedRow(), 0).toString()), Integer.parseInt(tblCodeLabo.getValueAt(tblCodeLabo.getSelectedRow(), 0).toString()));
             JOptionPane.showMessageDialog(null,
-                    "Votre visiteur"+ txtNom.getText()+ txtPrenom.getText() +"est inscrits","Nouvelle inscription",
+                    "Votre visiteur"+" "+txtNom.getText()+" "+ txtPrenom.getText()+" "+"est inscrits","Nouvelle inscription",
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnValiderInsererVisiteurMouseClicked

@@ -12,6 +12,20 @@ import java.util.Date;
  * @author alexk
  */
 public class Visiteur {
+
+    /**
+     * @return the leSecteur
+     */
+    public int getLeSecteur() {
+        return leSecteur;
+    }
+
+    /**
+     * @return the leLaboratoire
+     */
+    public int getLeLaboratoire() {
+        return leLaboratoire;
+    }
     private int visMatricule;
     private String visNom;
     private String visPrenom;
@@ -19,13 +33,13 @@ public class Visiteur {
     private String visCp;
     private String visVille;
     private Date visDateEmbauche;
-    private int secCode;
-    private int laboCode;
+    private int leSecteur;
+    private int leLaboratoire;
     
     public Visiteur(){
         
     }
-    public Visiteur(int unVisMat, String unVisNom, String unVisPre, String unVisAd, String unVisCp, String unVisVille, Date uneDateEmb, int unSecCode, int unLaboCode){
+    public Visiteur(int unVisMat, String unVisNom, String unVisPre, String unVisAd, String unVisCp, String unVisVille, Date uneDateEmb, int unSecteur, int unLabo){
         
         visMatricule=unVisMat;
         visNom=unVisNom;
@@ -34,10 +48,16 @@ public class Visiteur {
         visCp=unVisCp;
         visVille=unVisVille;
         visDateEmbauche=uneDateEmb;
-        secCode=unSecCode;
-        laboCode=unLaboCode;
+        leSecteur=unSecteur;
+        leLaboratoire=unLabo;
         
         
+    }
+    
+    public Visiteur(int unVisMat, String unVisNom, String unVisPre){
+        visMatricule=unVisMat;
+        visNom=unVisNom;
+        visPrenom=unVisPre;
     }
 
     /**
@@ -125,38 +145,21 @@ public class Visiteur {
     }
 
     /**
-     * @return the visDateEmbauche
+     * @param leSecteur the leSecteur to set
      */
-    public Date getVisDateEmbauche() {
-        return visDateEmbauche;
+    public void setLeSecteur(int leSecteur) {
+        this.leSecteur = leSecteur;
     }
 
     
     /**
-     * @return the secCode
+     * @param leLaboratoire the leLaboratoire to set
      */
-    public int getSecCode() {
-        return secCode;
+    public void setLeLaboratoire(int leLaboratoire) {
+        this.leLaboratoire = leLaboratoire;
     }
 
-    /**
-     * @param secCode the secCode to set
-     */
-    public void setSecCode(int secCode) {
-        this.secCode = secCode;
-    }
-
-    /**
-     * @return the laboCode
-     */
-    public int getLaboCode() {
-        return laboCode;
-    }
-
-    /**
-     * @param laboCode the laboCode to set
-     */
-    public void setLaboCode(int laboCode) {
-        this.laboCode = laboCode;
-    }
+    
 }
+  
+
