@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModelRegion extends AbstractTableModel {
     
-    private String[] nomsColonnes;
+    private String[] nomsColonnes= {"Regions"};
     private Vector<String[]> rows;
 
     @Override
@@ -42,10 +42,9 @@ public class ModelRegion extends AbstractTableModel {
     public void loadDatas(ArrayList<Region> lesRegions)
     {
         rows = new Vector<>();
-        nomsColonnes = new String[]{"Regions"};
         for(Region reg : lesRegions)
         {
-            rows.add(new String[]{reg.getRegNom});
+            rows.add(new String[]{reg.getRegNom()});
         }
         fireTableChanged(null);
     }

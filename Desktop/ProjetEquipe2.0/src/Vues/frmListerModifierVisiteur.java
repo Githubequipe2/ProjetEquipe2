@@ -7,12 +7,15 @@ package Vues;
 
 import Entity.Laboratoire;
 import Entity.Secteur;
+import Entity.Visiteur;
 import Model.ModelLaboratoire;
 import Model.ModelRegion;
 import Model.ModelSecteur;
 import Model.ModelVisiteur;
 import Tools.ConnexionBDD;
 import Tools.FonctionsMetier;
+import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -25,6 +28,8 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
     ModelRegion mdlReg;
     ModelVisiteur mdlVis;
     FonctionsMetier fm;
+    Visiteur visiteurSelectionne;
+    int numLigne;
     /**
      * Creates new form frmListerModifierVisiteur
      */
@@ -121,13 +126,28 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
             }
         ));
         tblVisiteur.setGridColor(new java.awt.Color(255, 255, 255));
+        tblVisiteur.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblVisiteurMouseClicked(evt);
+            }
+        });
         tblSecteur.setViewportView(tblVisiteur);
 
         btnValider.setBackground(new java.awt.Color(0, 0, 153));
         btnValider.setText("Valider");
+        btnValider.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnValiderMouseClicked(evt);
+            }
+        });
 
         btnAnnuler.setBackground(new java.awt.Color(0, 0, 153));
         btnAnnuler.setText("Annuler");
+        btnAnnuler.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAnnulerMouseClicked(evt);
+            }
+        });
 
         jLabel6.setText("MODIFIER VISITEUR");
 
@@ -152,39 +172,34 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 306, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cboSecteur, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                            .addGap(43, 43, 43)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtVilleVisiteur, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addGap(115, 115, 115)
-                                            .addComponent(txtNomVisiteur, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGap(2, 2, 2)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addGap(40, 40, 40)
+                                            .addGap(2, 2, 2)
                                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addGap(35, 35, 35)
+                                            .addGap(1, 1, 1)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addGap(1, 1, 1)
                                             .addComponent(jLabel9)))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtAdresseVisiteur, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtCodePostale, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtAdresseVisiteur, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(txtVilleVisiteur, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtNomVisiteur, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)))
                         .addGap(37, 37, 37))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(229, 229, 229)
@@ -193,15 +208,20 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
                         .addComponent(btnAnnuler, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(486, 486, 486)
-                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cboLabo, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tblSecteur, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tblSecteur, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cboSecteur, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGap(480, 480, 480)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cboLabo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(45, 45, 45))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,7 +286,7 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -296,7 +316,7 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -356,6 +376,57 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
             cboLabo.addItem(lab.getLabNom());
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void tblVisiteurMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVisiteurMouseClicked
+        // TODO add your handling code here:
+        numLigne= tblVisiteur.getSelectedRow();
+        visiteurSelectionne= fm.GetVisiteurByMat(Integer.parseInt(tblVisiteur.getValueAt(tblVisiteur.getSelectedRow(), 0) .toString()));
+        txtNomVisiteur.setText(visiteurSelectionne.getVisNom());
+        txtVilleVisiteur.setText(visiteurSelectionne.getVisVille());
+        txtAdresseVisiteur.setText(visiteurSelectionne.getVisAdresse());
+        txtCodePostale.setText(visiteurSelectionne.getVisCp());
+        
+        
+    }//GEN-LAST:event_tblVisiteurMouseClicked
+
+    private void btnValiderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnValiderMouseClicked
+        // TODO add your handling code here:
+        if(tblVisiteur.getSelectedRowCount()==0)
+        {
+            // On affiche un message
+            JOptionPane.showMessageDialog(null,
+                    "Veuillez selectionner un visiteur", "Erreur de saisie",
+                    JOptionPane.ERROR_MESSAGE);
+        }else if(cboSecteur.getSelectedItem().toString()==""){
+            JOptionPane.showMessageDialog(null,
+                    "Veuillez selectionner un Secteur", "Erreur de saisie",
+                    JOptionPane.ERROR_MESSAGE);
+        }else if(cboLabo.getSelectedItem().toString()==""){
+            JOptionPane.showMessageDialog(null,
+                    "Veuillez selectionner un Laboratoire", "Erreur de saisie",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            int secteur = fm.GetCodeSecteur(cboSecteur.getSelectedItem().toString());
+            int labo = fm.GetCodeLabo(cboLabo.getSelectedItem().toString());
+            fm.ModifierVisiteur(Integer.parseInt(tblVisiteur.getValueAt(tblVisiteur.getSelectedRow(), 0) .toString()),txtNomVisiteur.getText(), txtVilleVisiteur.getText(), txtAdresseVisiteur.getText(), txtCodePostale.getText(), secteur, labo);
+            JOptionPane.showMessageDialog(null,
+                    "Votre Visteur"+" "+txtNomVisiteur.getText()+" "+"a été modifiée","Nouvelle modification",
+                    JOptionPane.INFORMATION_MESSAGE);
+            mdlVis.loadDatas(fm.GetAllVisiteur());
+            tblVisiteur.setModel(mdlVis);
+        }
+    }//GEN-LAST:event_btnValiderMouseClicked
+
+    private void btnAnnulerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnnulerMouseClicked
+        // TODO add your handling code here:
+        tblVisiteur.clearSelection();
+        txtAdresseVisiteur.setText("");
+        txtCodePostale.setText("");
+        txtNomVisiteur.setText("");
+        txtVilleVisiteur.setText("");
+        
+    }//GEN-LAST:event_btnAnnulerMouseClicked
 
     /**
      * @param args the command line arguments

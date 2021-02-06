@@ -35,6 +35,8 @@ public class Visiteur {
     private Date visDateEmbauche;
     private int leSecteur;
     private int leLaboratoire;
+    private String Secteur;
+    private String Labo;
     
     public Visiteur(){
         
@@ -58,6 +60,20 @@ public class Visiteur {
         visMatricule=unVisMat;
         visNom=unVisNom;
         visPrenom=unVisPre;
+    }
+    public Visiteur(int unVisMat, String unVisNom, String unVisPre, String unVisAd, String unVisCp, String unVisVille, Date uneDateEmb, String unSecteur, String unLabo){
+        
+        visMatricule=unVisMat;
+        visNom=unVisNom;
+        visPrenom=unVisPre;
+        visAdresse=unVisAd;
+        visCp=unVisCp;
+        visVille=unVisVille;
+        visDateEmbauche=uneDateEmb;
+        Secteur=unSecteur;
+        Labo=unLabo;
+        
+        
     }
 
     /**
@@ -157,6 +173,27 @@ public class Visiteur {
      */
     public void setLeLaboratoire(int leLaboratoire) {
         this.leLaboratoire = leLaboratoire;
+    }
+
+    /**
+     * @return the Secteur
+     */
+    public String getSecteur() {
+        return Secteur;
+    }
+
+    /**
+     * @return the Labo
+     */
+    public String getLabo() {
+        return Labo;
+    }
+
+    /**
+     * @param Labo the Labo to set
+     */
+    public void setLabo(String Labo) {
+        this.Labo = Labo;
     }
 
     

@@ -8,6 +8,7 @@ package Tools;
 import Entity.Laboratoire;
 import Entity.Region;
 import Entity.Secteur;
+import Entity.Travailler;
 import Entity.Visiteur;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -113,11 +114,12 @@ public class FonctionsMetier implements IMetier
     }
 
     @Override
-    public void ModifierRegion(String regNom) {
+    public void ModifierRegion(String regNom, int regCode) {
         try {
             Connection cnx = ConnexionBDD.getCnx();
-            PreparedStatement ps = cnx.prepareStatement("update region set (?) where regNom= '"+regNom+"'");
-            ps.setString(1, regNom);
+            PreparedStatement ps = cnx.prepareStatement("update region set regNom='"+regNom+"' where regCode= '"+regCode+"'");
+            System.out.println(ps);
+//            ps.setString(1, regNom);
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
@@ -198,12 +200,12 @@ public class FonctionsMetier implements IMetier
         ArrayList<Visiteur> lesVisiteur = new ArrayList<>();
         try {
             Connection cnx = ConnexionBDD.getCnx();
-            PreparedStatement ps = cnx.prepareStatement("select visMatricule, visNom, visPrenom, visAdresse, visCp, visVille, visDateEmbauche, secCode, laboCode  from visiteur");
+            PreparedStatement ps = cnx.prepareStatement("select visMatricule, visNom, visPrenom, visAdresse, visCp, visVille, visDateEmbauche, secLibelle, labNom  from visiteur, secteur, labo where visiteur.secCode=secteur.secCode and visiteur.laboCode=labo.labCode");
             ResultSet rs = ps.executeQuery();
             System.out.println(ps);
             while (rs.next())
             {
-                Visiteur vis = new Visiteur(rs.getInt("visMatricule"),rs.getString("visNom"), rs.getString("visPrenom"), rs.getString("visAdresse"), rs.getString("visCp"), rs.getString("visVille"),rs.getDate("visDateEmbauche"), rs.getInt("secCode"), rs.getInt("laboCode"));
+                Visiteur vis = new Visiteur(rs.getInt("visMatricule"),rs.getString("visNom"), rs.getString("visPrenom"), rs.getString("visAdresse"), rs.getString("visCp"), rs.getString("visVille"),rs.getDate("visDateEmbauche"), rs.getString("secLibelle"), rs.getString("labNom"));
                 lesVisiteur.add(vis);
             }
             ps.close();
@@ -215,15 +217,16 @@ public class FonctionsMetier implements IMetier
 
     @Override
     public void ModifierVisiteur(int visMatricule, String visNom, String visVille, String visAdresse, String visCp, int secCode, int laboCode) {
- try {
+    try {
             Connection cnx = ConnexionBDD.getCnx();
-            PreparedStatement ps = cnx.prepareStatement("update visiteur set (?,?,?,?,?,?) where visMatricule ="+ visMatricule);
-            ps.setString(1, visNom);
-            ps.setString(2, visVille);
-            ps.setString(3, visAdresse);
-            ps.setString(4, visCp);
-            ps.setInt(5, secCode);
-            ps.setInt(6, laboCode);
+            PreparedStatement ps = cnx.prepareStatement("update visiteur set visNom='"+visNom+"' ,visVille='"+visVille+"', visAdresse='"+visAdresse+"', visCp='"+visCp+"',  secCode="+secCode+", laboCode="+laboCode+" where visMatricule ="+ visMatricule);
+//            ps.setString(1, visNom);
+//            ps.setString(2, visVille);
+//            ps.setString(3, visAdresse);
+//            ps.setString(4, visCp);
+//            ps.setInt(5, secCode);
+//            ps.setInt(6, laboCode);
+            System.out.println(ps);
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
@@ -235,7 +238,7 @@ public class FonctionsMetier implements IMetier
     public void VisiteurInsererRegion(int visMatricule, String JJMMAA, int regCode, String traRole) {
     try {
             Connection cnx = ConnexionBDD.getCnx();
-            PreparedStatement ps = cnx.prepareStatement("insert into visiteur values (?,?,?,?)");
+            PreparedStatement ps = cnx.prepareStatement("insert into travailler values (?,?,?,?)");
             ps.setInt(1, visMatricule );
             ps.setString(2, JJMMAA );
             ps.setInt(3, regCode);
@@ -249,7 +252,7 @@ public class FonctionsMetier implements IMetier
 
     @Override
     public ArrayList<Visiteur> GetAllVisiteur2() {
-ArrayList<Visiteur> lesVisiteur = new ArrayList<>();
+    ArrayList<Visiteur> lesVisiteur = new ArrayList<>();
         try {
             Connection cnx = ConnexionBDD.getCnx();
             PreparedStatement ps = cnx.prepareStatement("select visMatricule, visNom, visPrenom from visiteur");
@@ -265,6 +268,116 @@ ArrayList<Visiteur> lesVisiteur = new ArrayList<>();
             Logger.getLogger(FonctionsMetier.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lesVisiteur;     }
+
+    @Override
+    public int GetCodeSecteur(String nomSecteur) {
+        int codeSec=0;
+        try {
+            
+            Connection cnx = ConnexionBDD.getCnx();
+            PreparedStatement ps = cnx.prepareStatement("Select secCode from secteur where secLibelle ='"+nomSecteur+"'"); //Selectionne la plus grande mat de la table visiteur
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            codeSec = rs.getInt("secCode");
+            rs.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FonctionsMetier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return codeSec;
+    }
+
+    @Override
+    public int GetCodeLabo(String nomLabo) {
+    int codeLab=0;
+        try {
+            
+            Connection cnx = ConnexionBDD.getCnx();
+            PreparedStatement ps = cnx.prepareStatement("Select labCode from labo where labNom ='"+nomLabo+"'"); //Selectionne la plus grande mat de la table visiteur
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            codeLab = rs.getInt("labCode");
+            rs.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FonctionsMetier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return codeLab;    }
+
+    @Override
+    public Visiteur GetVisiteurByMat(int visMatricule) {
+    Visiteur vis = null;
+        try {
+            Connection cnx = ConnexionBDD.getCnx();
+            PreparedStatement ps = cnx.prepareStatement("select visMatricule, visNom, visPrenom, visAdresse, visCp, visVille, visDateEmbauche, secCode, laboCode from visiteur where visMatricule ="+visMatricule);
+            ResultSet rs = ps.executeQuery();
+            System.out.println(ps);
+            rs.next();
+            vis = new Visiteur(rs.getInt("visMatricule"),rs.getString("visNom"), rs.getString("visPrenom"), rs.getString("visAdresse"), rs.getString("visCp"), rs.getString("visVille"),rs.getDate("visDateEmbauche"), rs.getInt("secCode"), rs.getInt("laboCode"));
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(FonctionsMetier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vis;    }
+
+    @Override
+    public ArrayList<Region> GetAllRegionsVisiteur(int visMatricule) {
+        ArrayList<Region> lesRegions = new ArrayList<>();
+        try {
+            Connection cnx = ConnexionBDD.getCnx();
+            PreparedStatement ps = cnx.prepareStatement("select regNom from region, travailler where region.regCode=travailler.regcode and visMatricule="+visMatricule);
+            ResultSet rs = ps.executeQuery();
+            System.out.println(ps);
+            while (rs.next())
+            {
+                Region reg = new Region(rs.getString("regNom"));
+                lesRegions.add(reg);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(FonctionsMetier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lesRegions;
+        
+
+    }
+
+    
+    @Override
+    public ArrayList<Region> GetAllRegionsVisiteurNon(int visMatricule) {
+    ArrayList<Region> lesRegions = new ArrayList<>();
+        try {
+            Connection cnx = ConnexionBDD.getCnx();
+            PreparedStatement ps = cnx.prepareStatement("select regNom from region where regCode not in (SELECT regCode from travailler where visMatricule= "+visMatricule+")");
+            ResultSet rs = ps.executeQuery();
+            System.out.println(ps);
+            while (rs.next())
+            {
+                Region reg = new Region(rs.getString("regNom"));
+                lesRegions.add(reg);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(FonctionsMetier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lesRegions;    }
+
+    @Override
+    public int GetCodeRegion(String regNom) {
+    int codereg=0;
+        try {
+            
+            Connection cnx = ConnexionBDD.getCnx();
+            PreparedStatement ps = cnx.prepareStatement("Select regCode from region where regNom ='"+regNom+"'"); //Selectionne la plus grande mat de la table visiteur
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            codereg = rs.getInt("regCode");
+            rs.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FonctionsMetier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return codereg;    }
 
     
     

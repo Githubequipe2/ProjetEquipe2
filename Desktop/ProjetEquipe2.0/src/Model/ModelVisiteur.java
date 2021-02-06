@@ -45,7 +45,7 @@ public class ModelVisiteur extends AbstractTableModel{
         nomsColonnes = new String[]{"Matricule", "Nom", "Prenom", "Adresse", "CP", "Ville", "Secteur","Laboratoire"};
         for(Visiteur vis : lesVisiteurs)
         {
-            rows.add(new String[]{String.valueOf(vis.getVisMatricule()),vis.getVisNom(),vis.getVisPrenom(),vis.getVisAdresse(),String.valueOf(vis.getVisCp()),vis.getVisVille(),String.valueOf(vis.getLeSecteur()),String.valueOf(vis.getLeLaboratoire())});
+            rows.add(new String[]{String.valueOf(vis.getVisMatricule()),vis.getVisNom(),vis.getVisPrenom(),vis.getVisAdresse(),String.valueOf(vis.getVisCp()),vis.getVisVille(),vis.getSecteur(),vis.getLabo()});
         }
         fireTableChanged(null);
     }

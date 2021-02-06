@@ -11,6 +11,7 @@ import Model.ModelSecteur;
 import Model.ModelVisiteur;
 import Tools.ConnexionBDD;
 import Tools.FonctionsMetier;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -110,6 +111,11 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
             }
         ));
         tblVisiteur.setGridColor(new java.awt.Color(255, 255, 255));
+        tblVisiteur.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblVisiteurMouseClicked(evt);
+            }
+        });
         tblSecteur3.setViewportView(tblVisiteur);
 
         btnValider3.setBackground(new java.awt.Color(0, 0, 153));
@@ -275,6 +281,14 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
         mdlVis.loadDatas3Colonnes(fm.GetAllVisiteur2());
         tblVisiteur.setModel(mdlVis);
     }//GEN-LAST:event_formWindowOpened
+
+    private void tblVisiteurMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVisiteurMouseClicked
+        // TODO add your handling code here:
+        int mat = Integer.parseInt(tblVisiteur.getValueAt(tblVisiteur.getSelectedRow(), 0).toString());
+        mdlReg.loadDatas(fm.GetAllRegionsVisiteurNon(mat));
+        tblRegions.setModel(mdlReg);
+
+    }//GEN-LAST:event_tblVisiteurMouseClicked
 
     /**
      * @param args the command line arguments

@@ -14,7 +14,6 @@ public class Region {
     private int regCode;
     private int secCode;
     private String regNom;
-    public String getRegNom;
     
     public Region(){
         
@@ -22,8 +21,6 @@ public class Region {
     
     public Region(String unRegNom){
         
-//        regCode=unRegCode;
-//        secCode=unSecCode;
         regNom=unRegNom;
         
     }

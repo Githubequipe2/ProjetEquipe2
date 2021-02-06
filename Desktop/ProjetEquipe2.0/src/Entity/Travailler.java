@@ -29,6 +29,9 @@ public class Travailler {
         traRole=unTraRole;
         
     }
+    public Travailler(int unRegCode){
+        regCode=unRegCode;
+    }
 
     /**
      * @return the visMatricule

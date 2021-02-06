@@ -11,6 +11,8 @@ import Model.ModelSecteur;
 import Model.ModelVisiteur;
 import Tools.ConnexionBDD;
 import Tools.FonctionsMetier;
+import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -109,13 +111,28 @@ public class frmListerModifierRegion extends javax.swing.JFrame {
             }
         ));
         tblRegion.setGridColor(new java.awt.Color(255, 255, 255));
+        tblRegion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblRegionMouseClicked(evt);
+            }
+        });
         tblSecteur.setViewportView(tblRegion);
 
         btnValider.setBackground(new java.awt.Color(0, 0, 153));
         btnValider.setText("Valider");
+        btnValider.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnValiderMouseClicked(evt);
+            }
+        });
 
         btnAnnuler.setBackground(new java.awt.Color(0, 0, 153));
         btnAnnuler.setText("Annuler");
+        btnAnnuler.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAnnulerMouseClicked(evt);
+            }
+        });
 
         jLabel6.setText("MODIFIER LA REGION");
 
@@ -271,6 +288,33 @@ public class frmListerModifierRegion extends javax.swing.JFrame {
         mdlReg.loadDatas(fm.GetAllRegions());
         tblRegion.setModel(mdlReg);
     }//GEN-LAST:event_formWindowOpened
+
+    private void tblRegionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRegionMouseClicked
+        // TODO add your handling code here:
+        txtNomRegion.setText(tblRegion.getValueAt(tblRegion.getSelectedRow(), 0).toString());
+    }//GEN-LAST:event_tblRegionMouseClicked
+
+    private void btnValiderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnValiderMouseClicked
+        // TODO add your handling code here:
+        if(tblRegion.getSelectedRowCount()==0)
+        {
+            // On affiche un message
+            JOptionPane.showMessageDialog(null,
+                    "Veuillez selectionner une Region", "Erreur de saisie",
+                    JOptionPane.ERROR_MESSAGE);
+        }else{
+            fm.ModifierRegion(txtNomRegion.getText(),fm.GetCodeRegion(tblRegion.getValueAt(tblRegion.getSelectedRow(), 0).toString()));
+            JOptionPane.showMessageDialog(null,
+                    "Votre région"+" "+txtNomRegion.getText()+" "+"a été modifiée","Nouvelle inscription",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnValiderMouseClicked
+
+    private void btnAnnulerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnnulerMouseClicked
+        
+        tblRegion.clearSelection();
+        txtNomRegion.setText("");
+    }//GEN-LAST:event_btnAnnulerMouseClicked
 
     /**
      * @param args the command line arguments
