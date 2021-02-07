@@ -11,6 +11,9 @@ import Model.ModelSecteur;
 import Model.ModelVisiteur;
 import Tools.ConnexionBDD;
 import Tools.FonctionsMetier;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -58,6 +61,8 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         tblSecteur4 = new javax.swing.JScrollPane();
         tblRegions = new javax.swing.JTable();
+        txtdate = new java.awt.TextField();
+        label1 = new java.awt.Label();
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/secteur-medical.jpg"))); // NOI18N
 
@@ -120,9 +125,19 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
 
         btnValider3.setBackground(new java.awt.Color(0, 0, 153));
         btnValider3.setText("Valider");
+        btnValider3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnValider3MouseClicked(evt);
+            }
+        });
 
         btnAnnuler3.setBackground(new java.awt.Color(0, 0, 153));
         btnAnnuler3.setText("Annuler");
+        btnAnnuler3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAnnuler3MouseClicked(evt);
+            }
+        });
 
         jLabel6.setText("SELECTION REGION(S)");
 
@@ -136,6 +151,10 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
         ));
         tblRegions.setGridColor(new java.awt.Color(255, 255, 255));
         tblSecteur4.setViewportView(tblRegions);
+
+        txtdate.setText("2021-10-15 21:23:32");
+
+        label1.setText("Date");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -155,7 +174,11 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
                         .addComponent(tblSecteur4, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(txtdate, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnValider3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAnnuler3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,11 +196,16 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
                     .addComponent(tblSecteur3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tblSecteur4, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAnnuler3)
-                    .addComponent(btnValider3))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAnnuler3)
+                        .addComponent(btnValider3))
+                    .addComponent(txtdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37))
         );
+
+        label1.getAccessibleContext().setAccessibleName("Date");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -277,7 +305,10 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         fm = new FonctionsMetier();
+        mdlReg = new ModelRegion();
         mdlVis = new ModelVisiteur();
+        tblRegions.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
         mdlVis.loadDatas3Colonnes(fm.GetAllVisiteur2());
         tblVisiteur.setModel(mdlVis);
     }//GEN-LAST:event_formWindowOpened
@@ -287,8 +318,18 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
         int mat = Integer.parseInt(tblVisiteur.getValueAt(tblVisiteur.getSelectedRow(), 0).toString());
         mdlReg.loadDatas(fm.GetAllRegionsVisiteurNon(mat));
         tblRegions.setModel(mdlReg);
+        
 
     }//GEN-LAST:event_tblVisiteurMouseClicked
+
+    private void btnValider3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnValider3MouseClicked
+        // TODO add your handling code here:
+        fm.VisiteurInsererRegion(Integer.parseInt(tblVisiteur.getValueAt(tblVisiteur.getSelectedRow(), 0).toString()), txtdate.getText(), fm.GetCodeRegion(tblRegions.getValueAt(tblRegions.getSelectedRow(), 0).toString()), "Visiteur");
+    }//GEN-LAST:event_btnValider3MouseClicked
+
+    private void btnAnnuler3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnnuler3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAnnuler3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -338,10 +379,12 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private java.awt.Label label1;
     private javax.swing.JLabel lblAccueil3;
     private javax.swing.JTable tblRegions;
     private javax.swing.JScrollPane tblSecteur3;
     private javax.swing.JScrollPane tblSecteur4;
     private javax.swing.JTable tblVisiteur;
+    private java.awt.TextField txtdate;
     // End of variables declaration//GEN-END:variables
 }

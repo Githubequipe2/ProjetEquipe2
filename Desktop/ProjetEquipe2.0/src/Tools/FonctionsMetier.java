@@ -243,6 +243,7 @@ public class FonctionsMetier implements IMetier
             ps.setString(2, JJMMAA );
             ps.setInt(3, regCode);
             ps.setString(4, traRole);
+            System.out.println(ps);
             ps.execute();
             ps.close();
         } catch (SQLException ex) {
