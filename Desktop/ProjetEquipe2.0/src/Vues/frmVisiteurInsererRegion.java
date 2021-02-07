@@ -14,6 +14,7 @@ import Tools.FonctionsMetier;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -308,7 +309,7 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
         mdlReg = new ModelRegion();
         mdlVis = new ModelVisiteur();
         tblRegions.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
+       
         mdlVis.loadDatas3Colonnes(fm.GetAllVisiteur2());
         tblVisiteur.setModel(mdlVis);
     }//GEN-LAST:event_formWindowOpened
@@ -324,11 +325,25 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
 
     private void btnValider3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnValider3MouseClicked
         // TODO add your handling code here:
-        fm.VisiteurInsererRegion(Integer.parseInt(tblVisiteur.getValueAt(tblVisiteur.getSelectedRow(), 0).toString()), txtdate.getText(), fm.GetCodeRegion(tblRegions.getValueAt(tblRegions.getSelectedRow(), 0).toString()), "Visiteur");
+        if(tblRegions.getSelectedRowCount()==0)
+        {
+            // On affiche un message
+            JOptionPane.showMessageDialog(null,
+                    "Veuillez selectionner une Region", "Erreur de saisie",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            fm.VisiteurInsererRegion(Integer.parseInt(tblVisiteur.getValueAt(tblVisiteur.getSelectedRow(), 0).toString()), txtdate.getText(), fm.GetCodeRegion(tblRegions.getValueAt(tblRegions.getSelectedRow(), 0).toString()), "Visiteur");
+            JOptionPane.showMessageDialog(null,
+                    "Votre Region "+" "+tblRegions.getValueAt(tblRegions.getSelectedRow(), 0).toString()+" "+"a été ajoutée","Nouvelle inscription",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnValider3MouseClicked
 
     private void btnAnnuler3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnnuler3MouseClicked
         // TODO add your handling code here:
+        tblVisiteur.clearSelection();
+        tblRegions.clearSelection();
     }//GEN-LAST:event_btnAnnuler3MouseClicked
 
     /**
