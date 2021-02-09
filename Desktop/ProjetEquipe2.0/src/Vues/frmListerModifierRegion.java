@@ -307,6 +307,11 @@ public class frmListerModifierRegion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,
                     "Votre région"+" "+txtNomRegion.getText()+" "+"a été modifiée","Nouvelle inscription",
                     JOptionPane.INFORMATION_MESSAGE);
+            
+        mdlReg.loadDatas(fm.GetAllRegions());
+        tblRegion.setModel(mdlReg);
+        
+        txtNomRegion.setText("");
         }
     }//GEN-LAST:event_btnValiderMouseClicked
 

@@ -239,9 +239,9 @@ public class FonctionsMetier implements IMetier
     try {
             Connection cnx = ConnexionBDD.getCnx();
             PreparedStatement ps = cnx.prepareStatement("insert into travailler values (?,?,?,?)");
-            ps.setInt(1, visMatricule );
-            ps.setString(2, JJMMAA );
-            ps.setInt(3, regCode);
+            ps.setString(1, JJMMAA );
+            ps.setInt(2, regCode );
+            ps.setInt(3, visMatricule);
             ps.setString(4, traRole);
             System.out.println(ps);
             ps.execute();

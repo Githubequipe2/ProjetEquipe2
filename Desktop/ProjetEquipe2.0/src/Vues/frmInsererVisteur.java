@@ -450,6 +450,14 @@ public class frmInsererVisteur extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,
                     "Votre visiteur"+" "+txtNom.getText()+" "+ txtPrenom.getText()+" "+"est inscrits","Nouvelle inscription",
                     JOptionPane.INFORMATION_MESSAGE);
+            txtNom.setText("");
+        txtPrenom.setText("");
+        txtAdresse.setText("");
+        txtCodePostale.setText("");
+        txtDateEmbauche.setText("");
+        txtVille.setText("");
+        tblCodeLabo.clearSelection();
+        tblCodeSecteur.clearSelection();
         }
     }//GEN-LAST:event_btnValiderInsererVisiteurMouseClicked
 
@@ -461,6 +469,8 @@ public class frmInsererVisteur extends javax.swing.JFrame {
         txtCodePostale.setText("");
         txtDateEmbauche.setText("");
         txtVille.setText("");
+        tblCodeLabo.clearSelection();
+        tblCodeSecteur.clearSelection();
         
     }//GEN-LAST:event_btnAnnulerInsererVisiteurMouseClicked
 

@@ -314,11 +314,16 @@ public class frmInsererRegion extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null,
                     "Votre région"+" "+txtNomRegion.getText()+" "+"est enregistrée","Nouvelle inscription",
                     JOptionPane.INFORMATION_MESSAGE);
+        tblSecteur2.clearSelection();
+        txtCodeRegion.setText("");
+        txtNomRegion.setText("");
         }
     }//GEN-LAST:event_btnValiderInsereRegionMouseClicked
 
     private void btnInsererRegAnnulerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsererRegAnnulerMouseClicked
         // TODO add your handling code here:
+        
+        tblSecteur2.clearSelection();
         txtCodeRegion.setText("");
         txtNomRegion.setText("");
     }//GEN-LAST:event_btnInsererRegAnnulerMouseClicked

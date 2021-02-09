@@ -334,9 +334,12 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
         }
         else{
             fm.VisiteurInsererRegion(Integer.parseInt(tblVisiteur.getValueAt(tblVisiteur.getSelectedRow(), 0).toString()), txtdate.getText(), fm.GetCodeRegion(tblRegions.getValueAt(tblRegions.getSelectedRow(), 0).toString()), "Visiteur");
-            JOptionPane.showMessageDialog(null,
-                    "Votre Region "+" "+tblRegions.getValueAt(tblRegions.getSelectedRow(), 0).toString()+" "+"a été ajoutée","Nouvelle inscription",
+            
+          
+              JOptionPane.showMessageDialog(null,
+                    "Votre Region "+" "+tblRegions.getValueAt(tblRegions.getSelectedRow(), 0).toString()+" "+"a été ajoutée au visiteur "+tblVisiteur.getValueAt(tblVisiteur.getSelectedRow(), 1).toString()+" "+tblVisiteur.getValueAt(tblVisiteur.getSelectedRow(), 2).toString(),"Nouvelle inscription",
                     JOptionPane.INFORMATION_MESSAGE);
+          
         }
     }//GEN-LAST:event_btnValider3MouseClicked
 
