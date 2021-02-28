@@ -24,6 +24,12 @@ public class Region {
         regNom=unRegNom;
         
     }
+    public Region(String unRegNom, int unsecCode){
+        
+        regNom=unRegNom;
+        secCode=unsecCode;
+        
+    }
 
     /**
      * @return the regCode

@@ -44,6 +44,10 @@ public interface IMetier {
     public void VisiteurInsererRegion(int visMatricule, String JJMMAA, int regCode, String traRole);
     public ArrayList<Region> GetAllRegionsVisiteur(int visMatricule);
     public ArrayList<Region> GetAllRegionsVisiteurNon(int visMatricule);
+    
+    
+    
+    public ArrayList<Region> GetNombreVisiteurParRegion();
 
 }
 

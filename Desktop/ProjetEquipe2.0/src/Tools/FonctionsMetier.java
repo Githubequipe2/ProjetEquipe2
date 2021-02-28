@@ -380,6 +380,25 @@ public class FonctionsMetier implements IMetier
         }
         return codereg;    }
 
+    @Override
+    public ArrayList<Region> GetNombreVisiteurParRegion() {
+        ArrayList<Region> lesVisitParReg = new ArrayList<>();
+        try {
+            Connection cnx = ConnexionBDD.getCnx();
+            PreparedStatement ps = cnx.prepareStatement("select regNom, COUNT(*) FROM travailler, region  Where travailler.regCode=region.regCode GROUP by region.regCode");
+            ResultSet rs = ps.executeQuery();
+            System.out.println(ps);
+            while (rs.next())
+            {
+                Region trav = new Region(rs.getString("regNom"), rs.getInt("COUNT(*)"));
+                lesVisitParReg.add(trav);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(FonctionsMetier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lesVisitParReg;    }
+
     
     
 }
