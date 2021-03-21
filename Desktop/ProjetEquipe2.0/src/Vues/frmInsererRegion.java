@@ -59,6 +59,7 @@ public class frmInsererRegion extends javax.swing.JFrame {
         tblSecteur2 = new javax.swing.JTable();
         btnValiderInsereRegion = new javax.swing.JButton();
         btnInsererRegAnnuler = new javax.swing.JButton();
+        lblStat = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -101,9 +102,12 @@ public class frmInsererRegion extends javax.swing.JFrame {
 
         jLabel2.setText("INSERER VOTRE REGION");
 
-        jLabel3.setText("Nom Region");
+        jLabel3.setText("Nom Région");
 
-        jLabel6.setText("Code Region");
+        jLabel6.setText("Code Région");
+
+        txtCodeRegion.setEditable(false);
+        txtCodeRegion.setEnabled(false);
 
         jLabel7.setText("Code Secteur");
 
@@ -141,7 +145,6 @@ public class frmInsererRegion extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(186, 186, 186)
@@ -153,7 +156,8 @@ public class frmInsererRegion extends javax.swing.JFrame {
                                 .addComponent(txtCodeRegion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                                 .addComponent(txtNomRegion, javax.swing.GroupLayout.Alignment.LEADING)))
                         .addGap(160, 160, 160)
-                        .addComponent(tblSecteur, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tblSecteur, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(61, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -187,12 +191,20 @@ public class frmInsererRegion extends javax.swing.JFrame {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
+        lblStat.setText("STATISTIQUES");
+        lblStat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblStatMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,12 +219,12 @@ public class frmInsererRegion extends javax.swing.JFrame {
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(lblStat)))))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,23 +236,22 @@ public class frmInsererRegion extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblAccueil)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(lblStat))
                         .addGap(9, 9, 9)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(42, 42, 42)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(45, 45, 45))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 32, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,6 +265,7 @@ public class frmInsererRegion extends javax.swing.JFrame {
         // TODO add your handling code here:
         frmAccueil frm = new frmAccueil();
         frm.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_lblAccueilMouseClicked
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -261,12 +273,15 @@ public class frmInsererRegion extends javax.swing.JFrame {
         if(jComboBox1.getSelectedItem()=="INSERER"){
         frmInsererVisteur frm = new frmInsererVisteur();
         frm.setVisible(true);
+        this.dispose();
         }else if (jComboBox1.getSelectedItem()=="LISTER/MODIFIER"){
         frmListerModifierVisiteur frm2 = new frmListerModifierVisiteur();
         frm2.setVisible(true);
+        this.dispose();
         }else {
            frmVisiteurInsererRegion frm3 = new frmVisiteurInsererRegion();
         frm3.setVisible(true);
+        this.dispose();
         }
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -276,9 +291,11 @@ public class frmInsererRegion extends javax.swing.JFrame {
         if (jComboBox2.getSelectedItem()=="INSERER"){
         frmInsererRegion frm2 = new frmInsererRegion();
         frm2.setVisible(true);
+        this.dispose();
         }else {
            frmListerModifierRegion frm3 = new frmListerModifierRegion();
         frm3.setVisible(true);
+        this.dispose();
         }
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
@@ -288,6 +305,7 @@ public class frmInsererRegion extends javax.swing.JFrame {
         mdlSec = new ModelSecteur();
         mdlSec.loadDatas(fm.GetAllSecteurs());
         tblSecteur2.setModel(mdlSec);
+        txtCodeRegion.setText(String.valueOf(fm.GetLastNumRegion()));
     }//GEN-LAST:event_formWindowOpened
 
     private void btnValiderInsereRegionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnValiderInsereRegionMouseClicked
@@ -302,7 +320,7 @@ public class frmInsererRegion extends javax.swing.JFrame {
         {
             // On affiche un message
             JOptionPane.showMessageDialog(null,
-                    "Veuillez saisir un Code de Region", "Erreur de saisie",
+                    "Veuillez saisir un Code de Région", "Erreur de saisie",
                     JOptionPane.ERROR_MESSAGE);
         }else if(tblSecteur2.getSelectedRowCount()==0)
             {
@@ -327,6 +345,13 @@ public class frmInsererRegion extends javax.swing.JFrame {
         txtCodeRegion.setText("");
         txtNomRegion.setText("");
     }//GEN-LAST:event_btnInsererRegAnnulerMouseClicked
+
+    private void lblStatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStatMouseClicked
+        // TODO add your handling code here:
+        frmStatistiques frm7 = new frmStatistiques();
+        frm7.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblStatMouseClicked
 
     /**
      * @param args the command line arguments
@@ -378,6 +403,7 @@ public class frmInsererRegion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAccueil;
+    private javax.swing.JLabel lblStat;
     private javax.swing.JScrollPane tblSecteur;
     private javax.swing.JTable tblSecteur2;
     private javax.swing.JTextField txtCodeRegion;

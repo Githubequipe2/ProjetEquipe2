@@ -310,11 +310,11 @@ public class FonctionsMetier implements IMetier
     Visiteur vis = null;
         try {
             Connection cnx = ConnexionBDD.getCnx();
-            PreparedStatement ps = cnx.prepareStatement("select visMatricule, visNom, visPrenom, visAdresse, visCp, visVille, visDateEmbauche, secCode, laboCode from visiteur where visMatricule ="+visMatricule);
+            PreparedStatement ps = cnx.prepareStatement("select visMatricule, visNom, visPrenom, visAdresse, visCp, visVille, visDateEmbauche, secLibelle, labNom  from visiteur, secteur, labo where visiteur.secCode=secteur.secCode and visiteur.laboCode=labo.labCode and visMatricule ="+visMatricule);
             ResultSet rs = ps.executeQuery();
             System.out.println(ps);
             rs.next();
-            vis = new Visiteur(rs.getInt("visMatricule"),rs.getString("visNom"), rs.getString("visPrenom"), rs.getString("visAdresse"), rs.getString("visCp"), rs.getString("visVille"),rs.getDate("visDateEmbauche"), rs.getInt("secCode"), rs.getInt("laboCode"));
+            vis = new Visiteur(rs.getInt("visMatricule"),rs.getString("visNom"), rs.getString("visPrenom"), rs.getString("visAdresse"), rs.getString("visCp"), rs.getString("visVille"),rs.getDate("visDateEmbauche"), rs.getString("secLibelle"), rs.getString("labNom"));
             ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(FonctionsMetier.class.getName()).log(Level.SEVERE, null, ex);
@@ -398,6 +398,61 @@ public class FonctionsMetier implements IMetier
             Logger.getLogger(FonctionsMetier.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lesVisitParReg;    }
+
+    @Override
+    public int GetLastNumRegion() {
+    int lastNum=0;
+        try {
+            Connection cnx = ConnexionBDD.getCnx();
+            PreparedStatement ps = cnx.prepareStatement("select max(regCode)as code from region");
+            
+           ResultSet rs = ps.executeQuery();
+            rs.next();
+            lastNum = rs.getInt("code") + 1;
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(FonctionsMetier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lastNum;
+          }
+
+    @Override
+    public String GetNomSecteur(int secCode) {
+    String nomSec="";
+        try {
+            
+            Connection cnx = ConnexionBDD.getCnx();
+            PreparedStatement ps = cnx.prepareStatement("Select secLibelle from secteur where secCode ='"+secCode+"'"); //Selectionne la plus grande mat de la table visiteur
+            ResultSet rs = ps.executeQuery();
+            System.out.println(ps);
+            rs.next();
+            nomSec = rs.getString("secLibelle");
+            rs.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FonctionsMetier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nomSec;
+    }
+
+    @Override
+    public String GetNomLabo(int LaboCode) {
+        String nomLab="";
+        try {
+            
+            Connection cnx = ConnexionBDD.getCnx();
+            PreparedStatement ps = cnx.prepareStatement("Select laboNom from labo where labCode ='"+LaboCode+"'"); //Selectionne la plus grande mat de la table visiteur
+            ResultSet rs = ps.executeQuery();
+            System.out.println(ps);
+            rs.next();
+            nomLab = rs.getString("laboNom");
+            rs.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FonctionsMetier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nomLab;
+    }
 
     
     

@@ -73,6 +73,7 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
         cboSecteur = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         cboLabo = new javax.swing.JComboBox<>();
+        lblStat = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -266,6 +267,13 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        lblStat.setText("STATISTIQUES");
+        lblStat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblStatMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -284,9 +292,12 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(lblStat))
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -301,7 +312,8 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblAccueil)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(lblStat))
                         .addGap(9, 9, 9)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,6 +344,7 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
         // TODO add your handling code here:
         frmAccueil frm = new frmAccueil();
         frm.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_lblAccueilMouseClicked
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -339,12 +352,15 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
         if(jComboBox1.getSelectedItem()=="INSERER"){
         frmInsererVisteur frm = new frmInsererVisteur();
         frm.setVisible(true);
+        this.dispose();
         }else if (jComboBox1.getSelectedItem()=="LISTER/MODIFIER"){
         frmListerModifierVisiteur frm2 = new frmListerModifierVisiteur();
         frm2.setVisible(true);
+        this.dispose();
         }else {
            frmVisiteurInsererRegion frm3 = new frmVisiteurInsererRegion();
         frm3.setVisible(true);
+        this.dispose();
         }
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -354,9 +370,11 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
         if (jComboBox2.getSelectedItem()=="INSERER"){
         frmInsererRegion frm2 = new frmInsererRegion();
         frm2.setVisible(true);
+        this.dispose();
         }else {
            frmListerModifierRegion frm3 = new frmListerModifierRegion();
         frm3.setVisible(true);
+        this.dispose();
         }
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
@@ -367,14 +385,14 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
         mdlVis.loadDatas(fm.GetAllVisiteur());
         tblVisiteur.setModel(mdlVis);
         
-        for (Secteur sec : fm.GetAllSecteurs())
-        {
-            cboSecteur.addItem(sec.getSecLibelle());
-        }
-        for (Laboratoire lab : fm.GetAllLaboratoire())
-        {
-            cboLabo.addItem(lab.getLabNom());
-        }
+//        for (Secteur sec : fm.GetAllSecteurs())
+//        {
+//            cboSecteur.addItem(sec.getSecLibelle());
+//        }
+//        for (Laboratoire lab : fm.GetAllLaboratoire())
+//        {
+//            cboLabo.addItem(lab.getLabNom());
+//        }
     }//GEN-LAST:event_formWindowOpened
 
     private void tblVisiteurMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVisiteurMouseClicked
@@ -385,6 +403,16 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
         txtVilleVisiteur.setText(visiteurSelectionne.getVisVille());
         txtAdresseVisiteur.setText(visiteurSelectionne.getVisAdresse());
         txtCodePostale.setText(visiteurSelectionne.getVisCp());
+        for (Secteur sec : fm.GetAllSecteurs())
+        {
+            cboSecteur.addItem(sec.getSecLibelle());
+        }
+        cboSecteur.setSelectedItem(visiteurSelectionne.getSecteur());
+        for (Laboratoire lab : fm.GetAllLaboratoire())
+        {
+            cboLabo.addItem(lab.getLabNom());
+        }
+        cboLabo.setSelectedItem(visiteurSelectionne.getLabo());
         
         
     }//GEN-LAST:event_tblVisiteurMouseClicked
@@ -425,8 +453,18 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
         txtCodePostale.setText("");
         txtNomVisiteur.setText("");
         txtVilleVisiteur.setText("");
+        cboLabo.removeAllItems();
+        cboSecteur.removeAllItems();
         
     }//GEN-LAST:event_btnAnnulerMouseClicked
+
+    private void lblStatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStatMouseClicked
+        // TODO add your handling code here:
+        frmStatistiques frm7 = new frmStatistiques();
+        frm7.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_lblStatMouseClicked
 
     /**
      * @param args the command line arguments
@@ -484,6 +522,7 @@ public class frmListerModifierVisiteur extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAccueil;
+    private javax.swing.JLabel lblStat;
     private javax.swing.JScrollPane tblSecteur;
     private javax.swing.JTable tblVisiteur;
     private javax.swing.JTextField txtAdresseVisiteur;

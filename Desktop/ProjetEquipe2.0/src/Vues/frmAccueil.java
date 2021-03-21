@@ -169,6 +169,7 @@ public class frmAccueil extends javax.swing.JFrame {
         // TODO add your handling code here:
         frmAccueil frm = new frmAccueil();
         frm.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_lblAccueilMouseClicked
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -176,12 +177,15 @@ public class frmAccueil extends javax.swing.JFrame {
         if(jComboBox1.getSelectedItem()=="INSERER"){
         frmInsererVisteur frm = new frmInsererVisteur();
         frm.setVisible(true);
+        this.dispose();
         }else if (jComboBox1.getSelectedItem()=="LISTER/MODIFIER"){
         frmListerModifierVisiteur frm2 = new frmListerModifierVisiteur();
         frm2.setVisible(true);
+        this.dispose();
         }else {
            frmVisiteurInsererRegion frm3 = new frmVisiteurInsererRegion();
         frm3.setVisible(true);
+        this.dispose();
         }
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -196,9 +200,11 @@ public class frmAccueil extends javax.swing.JFrame {
         if (jComboBox2.getSelectedItem()=="INSERER"){
         frmInsererRegion frm2 = new frmInsererRegion();
         frm2.setVisible(true);
+        this.dispose();
         }else {
            frmListerModifierRegion frm3 = new frmListerModifierRegion();
         frm3.setVisible(true);
+        this.dispose();
         }
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
@@ -206,6 +212,7 @@ public class frmAccueil extends javax.swing.JFrame {
         // TODO add your handling code here:
         frmStatistiques frm7 = new frmStatistiques();
         frm7.setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_lblStatMouseClicked
 

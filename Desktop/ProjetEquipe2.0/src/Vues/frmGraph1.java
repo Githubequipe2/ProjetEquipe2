@@ -5,11 +5,19 @@
  */
 package Vues;
 
+import Tools.ConnexionBDD;
 import Tools.FonctionsMetier;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -55,17 +63,33 @@ public class frmGraph1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-        DefaultCategoryDataset donnees = new DefaultCategoryDataset();
-        donnees.setValue(10, "Value", "Test1");
-        donnees.setValue(20, "Value", "Test2");
-        donnees.setValue(30, "Value", "Test3");
-        donnees.setValue(40, "Value", "Test4");
-       
-        JFreeChart chart2 = ChartFactory.createLineChart("Test", "Abscisse", "", donnees);
-        ChartFrame fra = new ChartFrame("First", chart2);
-        fra.pack();
-        fra.setVisible(true);
+        try {
+            // TODO add your handling code here:
+            DefaultPieDataset monGraph = new DefaultPieDataset();
+            
+            Connection cnx = ConnexionBDD.getCnx();
+            PreparedStatement ps = cnx.prepareStatement("SELECT secteur.secLibelle, COUNT(regCode) FROM region, secteur where secteur.secCode=region.secCode group by region.secCode");
+            ResultSet rs = ps.executeQuery();
+            System.out.println(ps);
+            while (rs.next())
+            {
+                int count= rs.getInt("COUNT(regCode)");
+                monGraph.setValue(rs.getString("secteur.secLibelle"), count);
+            }
+            ps.close();
+            JFreeChart chart1 = ChartFactory.createPieChart(
+                    "Nombre de Régions par Secteurs",
+                    monGraph,
+                    true, // légende
+                    true, // info bulle
+                    false // url
+            );
+            ChartFrame frame = new ChartFrame("Graphique 1", chart1);
+            frame.pack();
+            frame.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(frmGraph1.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**

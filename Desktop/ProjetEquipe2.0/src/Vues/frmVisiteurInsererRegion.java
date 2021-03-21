@@ -64,6 +64,7 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
         tblRegions = new javax.swing.JTable();
         txtdate = new java.awt.TextField();
         label1 = new java.awt.Label();
+        lblStat = new javax.swing.JLabel();
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/secteur-medical.jpg"))); // NOI18N
 
@@ -170,8 +171,9 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(tblSecteur3, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                        .addGap(78, 78, 78)
                         .addComponent(tblSecteur4, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -206,7 +208,12 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
                 .addGap(37, 37, 37))
         );
 
-        label1.getAccessibleContext().setAccessibleName("Date");
+        lblStat.setText("STATISTIQUES");
+        lblStat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblStatMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -228,12 +235,15 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50)
+                                .addComponent(lblStat))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
+                        .addGap(67, 67, 67)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,7 +255,8 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblAccueil3)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(lblStat))
                         .addGap(9, 9, 9)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -276,6 +287,7 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
         // TODO add your handling code here:
         frmAccueil frm = new frmAccueil();
         frm.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_lblAccueil3MouseClicked
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -283,12 +295,15 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
         if(jComboBox1.getSelectedItem()=="INSERER"){
         frmInsererVisteur frm = new frmInsererVisteur();
         frm.setVisible(true);
+        this.dispose();
         }else if (jComboBox1.getSelectedItem()=="LISTER/MODIFIER"){
         frmListerModifierVisiteur frm2 = new frmListerModifierVisiteur();
         frm2.setVisible(true);
+        this.dispose();
         }else {
            frmVisiteurInsererRegion frm3 = new frmVisiteurInsererRegion();
         frm3.setVisible(true);
+        this.dispose();
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
@@ -297,9 +312,11 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
         if (jComboBox2.getSelectedItem()=="INSERER"){
         frmInsererRegion frm2 = new frmInsererRegion();
         frm2.setVisible(true);
+        this.dispose();
         }else {
            frmListerModifierRegion frm3 = new frmListerModifierRegion();
         frm3.setVisible(true);
+        this.dispose();
         }
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
@@ -329,7 +346,7 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
         {
             // On affiche un message
             JOptionPane.showMessageDialog(null,
-                    "Veuillez selectionner une Region", "Erreur de saisie",
+                    "Veuillez sélectionner une Région", "Erreur de saisie",
                     JOptionPane.ERROR_MESSAGE);
         }
         else{
@@ -337,7 +354,7 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
             
           
               JOptionPane.showMessageDialog(null,
-                    "Votre Region "+" "+tblRegions.getValueAt(tblRegions.getSelectedRow(), 0).toString()+" "+"a été ajoutée au visiteur "+tblVisiteur.getValueAt(tblVisiteur.getSelectedRow(), 1).toString()+" "+tblVisiteur.getValueAt(tblVisiteur.getSelectedRow(), 2).toString(),"Nouvelle inscription",
+                    "Votre Région "+" "+tblRegions.getValueAt(tblRegions.getSelectedRow(), 0).toString()+" "+"a été ajoutée au visiteur "+tblVisiteur.getValueAt(tblVisiteur.getSelectedRow(), 1).toString()+" "+tblVisiteur.getValueAt(tblVisiteur.getSelectedRow(), 2).toString(),"Nouvelle inscription",
                     JOptionPane.INFORMATION_MESSAGE);
           
         }
@@ -348,6 +365,13 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
         tblVisiteur.clearSelection();
         tblRegions.clearSelection();
     }//GEN-LAST:event_btnAnnuler3MouseClicked
+
+    private void lblStatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStatMouseClicked
+        // TODO add your handling code here:
+        frmStatistiques frm7 = new frmStatistiques();
+        frm7.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblStatMouseClicked
 
     /**
      * @param args the command line arguments
@@ -399,6 +423,8 @@ public class frmVisiteurInsererRegion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private java.awt.Label label1;
     private javax.swing.JLabel lblAccueil3;
+    private javax.swing.JLabel lblStat;
+    private javax.swing.JLabel lblStat2;
     private javax.swing.JTable tblRegions;
     private javax.swing.JScrollPane tblSecteur3;
     private javax.swing.JScrollPane tblSecteur4;

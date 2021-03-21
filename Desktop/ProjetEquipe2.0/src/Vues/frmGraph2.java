@@ -5,6 +5,24 @@
  */
 package Vues;
 
+import Tools.ConnexionBDD;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel; 
+
+import org.jfree.data.category.DefaultCategoryDataset;
+
+import org.jfree.chart.plot.PlotOrientation;
+
 /**
  *
  * @author alexk
@@ -49,7 +67,34 @@ public class frmGraph2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
+
+        try {
+            // TODO add your handling code here:
+            DefaultPieDataset monGraph = new DefaultPieDataset();
+            
+            Connection cnx = ConnexionBDD.getCnx();
+            PreparedStatement ps = cnx.prepareStatement("select visiteur.visNom, visiteur.secCode from visiteur, secteur where visiteur.secCode = secteur.secCode");
+            ResultSet rs = ps.executeQuery();
+            System.out.println(ps);
+            while (rs.next())
+            {
+                int count= rs.getInt("visiteur.secCode");
+                monGraph.setValue(rs.getString("visiteur.visNom"), count);
+            }
+            ps.close();
+            JFreeChart chart1 = ChartFactory.createPieChart(
+                    "Nombre de Visiteurs par Secteurs",
+                    monGraph,
+                    true, // légende
+                    true, // info bulle
+                    false // url
+            );
+            ChartFrame frame = new ChartFrame("Graphique 2", chart1);
+            frame.pack();
+            frame.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(frmGraph1.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**

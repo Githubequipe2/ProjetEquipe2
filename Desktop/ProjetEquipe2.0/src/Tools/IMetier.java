@@ -36,7 +36,10 @@ public interface IMetier {
     public ArrayList<Visiteur> GetAllVisiteur2();
     public void ModifierVisiteur(int visMatricule, String visNom, String visVille, String visAdresse, String visCp, int secCode, int laboCode);
     public int GetCodeSecteur(String nomSecteur);
+    public String GetNomSecteur(int secCode);
     public int GetCodeLabo(String nomLabo);
+    public String GetNomLabo(int LaboCode);
+
     public Visiteur GetVisiteurByMat(int visMatricule);
     
     
@@ -48,7 +51,7 @@ public interface IMetier {
     
     
     public ArrayList<Region> GetNombreVisiteurParRegion();
-
+    public int GetLastNumRegion();
 }
 
 

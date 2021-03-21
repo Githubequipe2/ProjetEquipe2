@@ -58,6 +58,7 @@ public class frmListerModifierRegion extends javax.swing.JFrame {
         btnValider = new javax.swing.JButton();
         btnAnnuler = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        lblStat2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -187,31 +188,42 @@ public class frmListerModifierRegion extends javax.swing.JFrame {
                 .addContainerGap(64, Short.MAX_VALUE))
         );
 
+        lblStat2.setText("STATISTIQUES");
+        lblStat2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblStat2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(lblAccueil)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 22, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(82, 82, 82)
+                                .addComponent(lblAccueil)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblStat2))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,14 +235,15 @@ public class frmListerModifierRegion extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblAccueil)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(lblStat2))
                         .addGap(9, 9, 9)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -254,6 +267,7 @@ public class frmListerModifierRegion extends javax.swing.JFrame {
         // TODO add your handling code here:
         frmAccueil frm = new frmAccueil();
         frm.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_lblAccueilMouseClicked
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -261,12 +275,15 @@ public class frmListerModifierRegion extends javax.swing.JFrame {
          if(jComboBox1.getSelectedItem()=="INSERER"){
         frmInsererVisteur frm = new frmInsererVisteur();
         frm.setVisible(true);
+        this.dispose();
         }else if (jComboBox1.getSelectedItem()=="LISTER/MODIFIER"){
         frmListerModifierVisiteur frm2 = new frmListerModifierVisiteur();
         frm2.setVisible(true);
+        this.dispose();
         }else {
            frmVisiteurInsererRegion frm3 = new frmVisiteurInsererRegion();
         frm3.setVisible(true);
+        this.dispose();
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
@@ -275,9 +292,11 @@ public class frmListerModifierRegion extends javax.swing.JFrame {
         if (jComboBox2.getSelectedItem()=="INSERER"){
         frmInsererRegion frm2 = new frmInsererRegion();
         frm2.setVisible(true);
+        this.dispose();
         }else {
            frmListerModifierRegion frm3 = new frmListerModifierRegion();
         frm3.setVisible(true);
+        this.dispose();
         }
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
@@ -300,7 +319,7 @@ public class frmListerModifierRegion extends javax.swing.JFrame {
         {
             // On affiche un message
             JOptionPane.showMessageDialog(null,
-                    "Veuillez selectionner une Region", "Erreur de saisie",
+                    "Veuillez sélectionner une Région", "Erreur de saisie",
                     JOptionPane.ERROR_MESSAGE);
         }else{
             fm.ModifierRegion(txtNomRegion.getText(),fm.GetCodeRegion(tblRegion.getValueAt(tblRegion.getSelectedRow(), 0).toString()));
@@ -320,6 +339,14 @@ public class frmListerModifierRegion extends javax.swing.JFrame {
         tblRegion.clearSelection();
         txtNomRegion.setText("");
     }//GEN-LAST:event_btnAnnulerMouseClicked
+
+    private void lblStat2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStat2MouseClicked
+        // TODO add your handling code here:
+        frmStatistiques frm7 = new frmStatistiques();
+        frm7.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_lblStat2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -370,6 +397,9 @@ public class frmListerModifierRegion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAccueil;
+    private javax.swing.JLabel lblStat;
+    private javax.swing.JLabel lblStat1;
+    private javax.swing.JLabel lblStat2;
     private javax.swing.JTable tblRegion;
     private javax.swing.JScrollPane tblSecteur;
     private javax.swing.JTextField txtNomRegion;
